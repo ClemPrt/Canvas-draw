@@ -102,9 +102,9 @@ $canvas.addEventListener('mousedown', mouseDown, false)
 $canvas.addEventListener('mousemove', mouseMove, false)
 $canvas.addEventListener('mouseup', mouseUp, false)
 
-$canvas.addEventListener('touchend', mouseDown, false)
+$canvas.addEventListener('touchstart', mouseDown, false)
 $canvas.addEventListener('touchmove', mouseMove, false)
-$canvas.addEventListener('touchstart', mouseUp, false)
+$canvas.addEventListener('touchend', mouseUp, false)
 
 
 
