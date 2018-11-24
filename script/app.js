@@ -9,6 +9,8 @@ let brushSizePaint = document.querySelector('.brush-size-paint')
 let brushSizePaintDefault = "1";
 let brushSizeEraser = document.querySelector('.brush-size-eraser')
 let brushSizeEraserDefault = "1";
+let brushSizeUnderline = document.querySelector('.brush-size-underline')
+let brushSizeUnderlineDefault = "1";
 
 
 let menuToggle = document.querySelector('canvas')
@@ -16,12 +18,14 @@ const menu = document.querySelector('.menu')
 let tuto = document.querySelector('.tuto')
 let pen = document.querySelector('.pen')
 let eraser = document.querySelector('.eraser')
+let underline = document.querySelector('.underline')
 
 let clear = document.querySelector('.button-action p:first-child')
 let save = document.querySelector('.button-action p:last-child')
 
 let test1 = true
 let test2 = false
+let test3 = false
 
 
 
@@ -86,10 +90,17 @@ function mouseMove(_event) {
         context.lineTo(cursor.x = _event.clientX, cursor.y = _event.clientY)
         if (test1 === true) {
             test2 === false
-            draw()
-        } else {
+            test3 === false
+            pencil()
+        } else if (test2 === true) {
             test1 === false
+            test3 === false
             Eraser()
+        } else if (test3 === true) {
+            test1 === false
+            test2 === false
+            Underline()
+            
         }
     }
 }
@@ -148,12 +159,22 @@ function updateTwo(_event) {
 }
 
 /**
- * Draw
+ * pencil
  */
-function draw(){
+function pencil(){
     context.lineWidth = brushSizePaintDefault
     context.lineJoin = 'round'
     context.lineCap = 'round'
+    context.strokeStyle = colorPaint
+    context.stroke()
+}
+/**
+ * underline
+ */
+function Underline() {
+    context.lineWidth = brushSizeUnderlineDefault
+    context.lineJoin = 'butt'
+    context.lineCap = 'butt'
     context.strokeStyle = colorPaint
     context.stroke()
 }
@@ -176,19 +197,34 @@ function brushSizePaintFonction() {
 function brushSizeEraserFonction() {
     brushSizeEraserDefault = _event.innerHTML
 }
+/**
+ * Brush size underline
+ */
+function brushSizeUnderlineFonction() {
+    brushSizeUnderlineDefault = _event.innerHTML
+}
 
 
 pen.addEventListener('click', () => {
     test1 = true
     test2 = false
+    test3 = false
     brushSizePaint.style.display == "block" ? brushSizePaint.style.display = "none" :
         brushSizePaint.style.display = "block";
 })
 eraser.addEventListener('click', () => {
     test1 = false
     test2 = true
+    test3 = false
     brushSizeEraser.style.display == "block" ? brushSizeEraser.style.display = "none" :
         brushSizeEraser.style.display = "block";
+})
+underline.addEventListener('click', () => {
+    test1 = false
+    test2 = false
+    test3 = true
+    brushSizeUnderline.style.display == "block" ? brushSizeUnderline.style.display = "none" :
+        brushSizeUnderline.style.display = "block";
 })
 
 
@@ -228,7 +264,7 @@ save.addEventListener('click', function (_event) {
 document.addEventListener('keydown', function (_event) {
     //Play pause toggle
     if (_event.keyCode == 66) {
-        draw();
+        pencil();
     } else if (_event.keyCode == 69){
         Eraser()
     }

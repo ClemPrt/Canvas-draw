@@ -130,9 +130,22 @@ Menu
     box-sizing: border-box;
     display: none;
 }
+.brush-size-underline {
+    position: absolute;
+    top: 20px;
+    left: 100px;
+    padding: 10px 0px;
+    border: 2px solid white;
+    min-width: 40px;
+    min-height: 40px;
+    border-radius: 100%;
+    margin: 5px 3px;
+    box-sizing: border-box;
+    display: none;
+}
 
 .input-color{
-    margin-top: 250px;
+    margin-top: 200px;
 }
 
 input[type=color] {
