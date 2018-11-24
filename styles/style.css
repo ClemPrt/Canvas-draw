@@ -71,7 +71,7 @@ Menu
 .logo h1{
     margin-top: 15px;
     text-align: center;
-    font-size: 25px;
+    font-size: 3em;
 }
 
 .inner img{
@@ -130,7 +130,7 @@ Menu
     box-sizing: border-box;
     display: none;
 }
-.brush-size-underline {
+.brush-size-marker {
     position: absolute;
     top: 20px;
     left: 100px;

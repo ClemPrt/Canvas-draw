@@ -9,16 +9,16 @@ let brushSizePaint = document.querySelector('.brush-size-paint')
 let brushSizePaintDefault = "1";
 let brushSizeEraser = document.querySelector('.brush-size-eraser')
 let brushSizeEraserDefault = "1";
-let brushSizeUnderline = document.querySelector('.brush-size-underline')
-let brushSizeUnderlineDefault = "1";
+let brushSizeMarker = document.querySelector('.brush-size-marker')
+let brushSizeMarkerDefault = "1";
 
 
 let menuToggle = document.querySelector('canvas')
 const menu = document.querySelector('.menu')
 let tuto = document.querySelector('.tuto')
 let pen = document.querySelector('.pen')
+let marker = document.querySelector('.marker')
 let eraser = document.querySelector('.eraser')
-let underline = document.querySelector('.underline')
 
 let clear = document.querySelector('.button-action p:first-child')
 let save = document.querySelector('.button-action p:last-child')
@@ -32,7 +32,6 @@ let test3 = false
 /**
  * Resize
  */
-/* Resize */
 const sizes = {
     width: 800,
     height: 600
@@ -65,8 +64,6 @@ document.addEventListener('keydown', function (_event) {
         })
 
 
-
-
 /**
  * Cursor
  */
@@ -75,7 +72,6 @@ const cursor = {
     y: 0,
     down: false
 }
-
 
 
 function mouseDown(_event){
@@ -91,7 +87,7 @@ function mouseMove(_event) {
         if (test1 === true) {
             test2 === false
             test3 === false
-            pencil()
+            Pencil()
         } else if (test2 === true) {
             test1 === false
             test3 === false
@@ -99,7 +95,7 @@ function mouseMove(_event) {
         } else if (test3 === true) {
             test1 === false
             test2 === false
-            Underline()
+            Marker()
             
         }
     }
@@ -116,8 +112,6 @@ $canvas.addEventListener('mouseup', mouseUp, false)
 $canvas.addEventListener('touchstart', mouseDown, false)
 $canvas.addEventListener('touchmove', mouseMove, false)
 $canvas.addEventListener('touchend', mouseUp, false)
-
-
 
 
 /**
@@ -158,10 +152,11 @@ function updateTwo(_event) {
     }
 }
 
+
 /**
  * pencil
  */
-function pencil(){
+function Pencil(){
     context.lineWidth = brushSizePaintDefault
     context.lineJoin = 'round'
     context.lineCap = 'round'
@@ -169,10 +164,10 @@ function pencil(){
     context.stroke()
 }
 /**
- * underline
+ * marker
  */
-function Underline() {
-    context.lineWidth = brushSizeUnderlineDefault
+function Marker() {
+    context.lineWidth = brushSizeMarkerDefault
     context.lineJoin = 'butt'
     context.lineCap = 'butt'
     context.strokeStyle = colorPaint
@@ -184,6 +179,7 @@ function Underline() {
 function Eraser(){
     context.clearRect(cursor.x, cursor.y, brushSizeEraserDefault, brushSizeEraserDefault);
 }
+
 
 /**
  * Brush size paint
@@ -198,13 +194,16 @@ function brushSizeEraserFonction() {
     brushSizeEraserDefault = _event.innerHTML
 }
 /**
- * Brush size underline
+ * Brush size marker
  */
-function brushSizeUnderlineFonction() {
-    brushSizeUnderlineDefault = _event.innerHTML
+function brushSizeMarkerFonction() {
+    brushSizeMarkerDefault = _event.innerHTML
 }
 
 
+/**
+ * Tools select
+ */
 pen.addEventListener('click', () => {
     test1 = true
     test2 = false
@@ -219,12 +218,12 @@ eraser.addEventListener('click', () => {
     brushSizeEraser.style.display == "block" ? brushSizeEraser.style.display = "none" :
         brushSizeEraser.style.display = "block";
 })
-underline.addEventListener('click', () => {
+marker.addEventListener('click', () => {
     test1 = false
     test2 = false
     test3 = true
-    brushSizeUnderline.style.display == "block" ? brushSizeUnderline.style.display = "none" :
-        brushSizeUnderline.style.display = "block";
+    brushSizeMarker.style.display == "block" ? brushSizeMarker.style.display = "none" :
+        brushSizeMarker.style.display = "block";
 })
 
 
@@ -241,7 +240,7 @@ clear.addEventListener('click', () => {
 
 
 /**
- * Download canvas .png
+ * Download canvas (.png)
  */
 save = document.querySelector('.save-image');
 
@@ -264,11 +263,12 @@ save.addEventListener('click', function (_event) {
 document.addEventListener('keydown', function (_event) {
     //Play pause toggle
     if (_event.keyCode == 66) {
-        pencil();
+        Pencil();
+    } else if (_event.keyCode == 77) {
+        Marker()
     } else if (_event.keyCode == 69){
         Eraser()
-    }
-    else if (_event.keyCode == 8){
+    } else if (_event.keyCode == 8){
         clear_canvas()
     }
 })
