@@ -16,7 +16,7 @@ Options :
 
 ## Keyboard
 - Press "TAB" to open the tool panel
-- Press "B" to select the pencils
+- Press "B" to select the pencil
 - Press "M' to select the marker
 - Press "E" to select the eraser
 - Press "DELETE" to clear canvas
@@ -26,6 +26,16 @@ Options :
 - CSS
 - JS
 - Canvas
+
+## Recommended browser
+
+- Google Chrome & Firefox
+- For Safari, some problems with the changement of the brush and background color
+
+## Ressources
+
+- Google font (Maven Pro)
+- Reset.css
 
 
 

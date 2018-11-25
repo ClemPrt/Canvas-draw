@@ -26,7 +26,7 @@ let clear = document.querySelector('.button-action p:first-child')
 let save = document.querySelector('.button-action p:last-child')
 
 // Test tools variable
-let testPencil = true
+let testPencil = false
 let testMarker = false
 let testEraser = false
 
@@ -55,16 +55,16 @@ resize()
 /**
  * Menu toggle
  */
-function MenuToggle(){
+function MenuToggle() {
     menu.classList.toggle('open')
 }
 
 document.addEventListener('keydown', function (_event) {
-            //Play pause toggle
-            if (_event.keyCode == 9) {
-                MenuToggle();
-            }
-        })
+    //Play pause toggle
+    if (_event.keyCode == 9) {
+        MenuToggle();
+    }
+})
 
 
 /**
@@ -76,7 +76,7 @@ const cursor = {
 }
 
 
-function mouseDown(_event){
+function mouseDown(_event) {
     painting = true
     tuto.style.display = "none"
     context.beginPath()
@@ -90,20 +90,22 @@ function mouseMove(_event) {
             testMarker === false
             testEraser === false
             Pencil()
+            console.log("No")
         } else if (testMarker === true) {
             testPencil === false
             testEraser === false
             Marker()
+            console.log("Noo")
         } else if (testEraser === true) {
             testPencil === false
             testMarker === false
             Eraser()
-            
+            console.log("Nooo")
         }
     }
 }
 
-function mouseUp(_event){
+function mouseUp(_event) {
     painting = false
 }
 
@@ -160,7 +162,7 @@ function updateTwo(_event) {
  * tools (pencil / marker / eraser)
  */
 // Pencil
-function Pencil(){
+function Pencil() {
     context.lineWidth = brushSizePaintDefault
     context.lineJoin = 'round'
     context.lineCap = 'round'
@@ -176,7 +178,7 @@ function Marker() {
     context.stroke()
 }
 // Eraser
-function Eraser(){
+function Eraser() {
     context.clearRect(cursor.x, cursor.y, brushSizeEraserDefault, brushSizeEraserDefault);
 }
 
@@ -205,25 +207,25 @@ function brushSizeMarkerFonction() {
  * Tools select
  */
 pen.addEventListener('click', () => {
-    test1 = true
-    test2 = false
-    test3 = false
+    testPencil = true
+    testMarker = false
+    testEraser = false
     brushSizePaint.style.display == "block" ? brushSizePaint.style.display = "none" :
         brushSizePaint.style.display = "block";
 })
-eraser.addEventListener('click', () => {
-    test1 = false
-    test2 = true
-    test3 = false
-    brushSizeEraser.style.display == "block" ? brushSizeEraser.style.display = "none" :
-        brushSizeEraser.style.display = "block";
-})
 marker.addEventListener('click', () => {
-    test1 = false
-    test2 = false
-    test3 = true
+    testPencil = false
+    testMarker = true
+    testEraser = false
     brushSizeMarker.style.display == "block" ? brushSizeMarker.style.display = "none" :
         brushSizeMarker.style.display = "block";
+})
+eraser.addEventListener('click', () => {
+    testPencil = false
+    testMarker = false
+    testEraser = true
+    brushSizeEraser.style.display == "block" ? brushSizeEraser.style.display = "none" :
+        brushSizeEraser.style.display = "block";
 })
 
 
@@ -232,7 +234,7 @@ marker.addEventListener('click', () => {
  */
 function clear_canvas() {
     context.clearRect(0, 0, sizes.width, sizes.height)
-} 
+}
 
 clear.addEventListener('click', () => {
     clear_canvas()
@@ -245,7 +247,7 @@ clear.addEventListener('click', () => {
 save = document.querySelector('.save-image');
 
 
-function Save(){
+function Save() {
     let dataURL = $canvas.toDataURL('image/png');
     save.href = dataURL;
 }
@@ -265,9 +267,9 @@ document.addEventListener('keydown', function (_event) {
         Pencil();
     } else if (_event.keyCode == 77) {
         Marker()
-    } else if (_event.keyCode == 69){
+    } else if (_event.keyCode == 69) {
         Eraser()
-    } else if (_event.keyCode == 8){
+    } else if (_event.keyCode == 8) {
         clear_canvas()
     }
 })
