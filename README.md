@@ -29,8 +29,7 @@ Options :
 
 
 
-Made by Clément Parot
-HETIC student P2022 ❤️
+Made by Clément Parot / HETIC student P2022 ❤️
 
 
 

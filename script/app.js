@@ -1,31 +1,34 @@
+// init
 const $canvas = document.querySelector('.js-canvas')
 const context = $canvas.getContext('2d')
-let color = document.querySelector('#colorBrush')
-let painting = false
 
-let colorPaint
-
+// Brush variable
 let brushSizePaint = document.querySelector('.brush-size-paint')
-let brushSizePaintDefault = "1";
+let brushSizePaintDefault = "50";
 let brushSizeEraser = document.querySelector('.brush-size-eraser')
-let brushSizeEraserDefault = "1";
+let brushSizeEraserDefault = "50";
 let brushSizeMarker = document.querySelector('.brush-size-marker')
-let brushSizeMarkerDefault = "1";
+let brushSizeMarkerDefault = "50";
 
-
+// Menu variable
 let menuToggle = document.querySelector('canvas')
 const menu = document.querySelector('.menu')
 let tuto = document.querySelector('.tuto')
+
+// Tools variable
+let color = document.querySelector('#colorBrush')
+let painting = false
+let colorPaint
 let pen = document.querySelector('.pen')
 let marker = document.querySelector('.marker')
 let eraser = document.querySelector('.eraser')
-
 let clear = document.querySelector('.button-action p:first-child')
 let save = document.querySelector('.button-action p:last-child')
 
-let test1 = true
-let test2 = false
-let test3 = false
+// Test tools variable
+let testPencil = true
+let testMarker = false
+let testEraser = false
 
 
 
@@ -70,7 +73,6 @@ document.addEventListener('keydown', function (_event) {
 const cursor = {
     x: 0,
     y: 0,
-    down: false
 }
 
 
@@ -84,18 +86,18 @@ function mouseDown(_event){
 function mouseMove(_event) {
     if (painting) {
         context.lineTo(cursor.x = _event.clientX, cursor.y = _event.clientY)
-        if (test1 === true) {
-            test2 === false
-            test3 === false
+        if (testPencil === true) {
+            testMarker === false
+            testEraser === false
             Pencil()
-        } else if (test2 === true) {
-            test1 === false
-            test3 === false
-            Eraser()
-        } else if (test3 === true) {
-            test1 === false
-            test2 === false
+        } else if (testMarker === true) {
+            testPencil === false
+            testEraser === false
             Marker()
+        } else if (testEraser === true) {
+            testPencil === false
+            testMarker === false
+            Eraser()
             
         }
     }
@@ -105,10 +107,12 @@ function mouseUp(_event){
     painting = false
 }
 
+// desktop touch
 $canvas.addEventListener('mousedown', mouseDown, false)
 $canvas.addEventListener('mousemove', mouseMove, false)
 $canvas.addEventListener('mouseup', mouseUp, false)
 
+// mobile touch
 $canvas.addEventListener('touchstart', mouseDown, false)
 $canvas.addEventListener('touchmove', mouseMove, false)
 $canvas.addEventListener('touchend', mouseUp, false)
@@ -117,7 +121,6 @@ $canvas.addEventListener('touchend', mouseUp, false)
 /**
  * color background
  */
-
 window.addEventListener("load", colorBackground, false);
 
 function colorBackground() {
@@ -154,8 +157,9 @@ function updateTwo(_event) {
 
 
 /**
- * pencil
+ * tools (pencil / marker / eraser)
  */
+// Pencil
 function Pencil(){
     context.lineWidth = brushSizePaintDefault
     context.lineJoin = 'round'
@@ -163,9 +167,7 @@ function Pencil(){
     context.strokeStyle = colorPaint
     context.stroke()
 }
-/**
- * marker
- */
+// Marker
 function Marker() {
     context.lineWidth = brushSizeMarkerDefault
     context.lineJoin = 'butt'
@@ -173,9 +175,7 @@ function Marker() {
     context.strokeStyle = colorPaint
     context.stroke()
 }
-/**
- * Eraser
- */
+// Eraser
 function Eraser(){
     context.clearRect(cursor.x, cursor.y, brushSizeEraserDefault, brushSizeEraserDefault);
 }
@@ -232,7 +232,7 @@ marker.addEventListener('click', () => {
  */
 function clear_canvas() {
     context.clearRect(0, 0, sizes.width, sizes.height)
-}
+} 
 
 clear.addEventListener('click', () => {
     clear_canvas()
@@ -253,7 +253,6 @@ function Save(){
 save.addEventListener('click', function (_event) {
     Save()
 });
-
 
 
 
